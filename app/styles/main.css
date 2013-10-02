@@ -1,0 +1,132 @@
+body{
+    font-family: 'Happy Monkey', cursive;
+    background-color: #eee;
+}
+
+
+h1{
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    text-shadow: 1px 1px #F36C8C;
+    /*color: #ffffff;*/
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+.container{
+    width: 600px;
+    margin: 10px auto;
+    padding: 10px;
+    /*background-color: blue;*/
+    text-align: center;
+}
+
+#gameBoard{
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.box{
+    height: 100px;
+    width: 100px;
+    border: 10px solid white;
+    float: left;
+    font-size: 100px;
+    text-align: center;
+    line-height: 1em;
+    background-color: black;
+font-weight: bold;
+    text-shadow: 1px 1px #F36C8C;
+    color: #ffffff;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+
+}
+
+.box:hover{
+    background-color: gray;
+}
+
+.top_row{
+    border-top: none;
+    margin-top: 10px;
+}
+
+.bottom_row{
+    border-bottom: none;
+}
+.col1{
+    border-left: none;
+    margin-left: 10px;
+}
+
+.col3{
+    border-right: none;
+    margin-right: 10px;
+}
+
+/*.clear{
+    clear: both;
+}*/
+
+.clearfix:after {
+    display:block;
+    height:0;
+    content: '.';
+    visibility: hidden;
+    clear:both;
+}
+
+#btn{
+    height: 50px;
+    width: 300px;
+    margin: 60px;
+    /*background-color: #eee;*/
+    /*font-size: 30px;*/
+    font-family: 'Happy Monkey', cursive;
+    padding: 10px 20px 11px !important;
+    font-size: 21px !important;
+    background-color: #F36C8C;
+    font-weight: bold;
+    text-shadow: 1px 1px #F36C8C;
+    color: #ffffff;
+    border-radius: 100px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border: 1px solid #F36C8C;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+
+.popup{
+    width: 70%;
+    height: 70%;
+    /*width: 100px;
+    height: 100px;*/
+    position: relative;
+    top: 200px;
+    left: 40px;
+    z-index: 1;
+    font-family: 'Happy Monkey', cursive;
+    padding: 10px 20px 11px !important;
+    font-size: 21px !important;
+    background-color: #F36C8C;
+    font-weight: bold;
+    text-shadow: 1px 1px #F36C8C;
+    color: #ffffff;
+    border-radius: 100px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border: 1px solid #F36C8C;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+
+}

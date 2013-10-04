@@ -19,19 +19,24 @@ var gameEnded = false;
 
 $scope.clickBox = function(box){
 
+	if (gameEnded == true) 
+	return;
+
 	if($scope.gameBoard[box] !='')
 		// alert ("pick another box!");
 	return;
 
 		if(playerTurn % 2 == 1)
-			event.target.innerHTML = "X";	
+			$scope.gameBoard[box] = "X";	
 		else
-			event.target.innerHTML ="O";
-
-		$scope.gameBoard[box]=event.target.innerHTML;
+			$scope.gameBoard[box] ="O";
 
 		playerTurn++;
-alert(box);	
+
+		console.log($scope.gameBoard[box])
+		console.log($scope.gameBoard)
+// alert(box);	
+
 	}
 
 $scope.win = function(){
@@ -51,7 +56,7 @@ $scope.win = function(){
 					} 				
 	}
 $scope.tie = function(){
-	gameEnded = true;
+	// gameEnded = true;
 
 	for(var i = 0; i < $scope.gameBoard.length; i++)
 		if ($scope.gameBoard[i]=="")

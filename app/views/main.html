@@ -4,7 +4,7 @@
     <div class="container" ng-controller="ticTacCtrl">
           
         <div ng-class="{box:true}" ng-repeat="box in gameBoard" ng-click="clickBox($index); win(); tie();">
-           {{"box" + $index}}
+           {{box}}
 
                
         </div>

@@ -1,83 +1,60 @@
 'use strict';
 
-angular.module('newTicApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+// angular.module('newTicApp')
+//   .controller('MainCtrl', function ($scope) {
+//     $scope.awesomeThings = [
+//       'HTML5 Boilerplate',
+//       'AngularJS',
+//       'Karma'
+//     ];
+//   });
 
+function ticTacCtrl($scope){
 
+$scope.gameBoard= ['','','','','','','','',''];
 
-var gameBoard = ['','','','','','','','',''];
+var playerTurn = 1;
 
-var turn = 'X';
+var gameEnded = false;
 
-var gameEnded = gameEnded || false;
+$scope.clickBox = function(box){
 
+	if($scope.gameBoard[box] !='')
+		// alert ("pick another box!");
+	return;
 
-function playGame() {
-	var box = event.target.id; 
-	var ind = box.substring(3) - 1;
+		if(playerTurn % 2 == 1)
+			event.target.innerHTML = "X";	
+		else
+			event.target.innerHTML ="O";
 
-	if( gameBoard[ind] == '' ) {
+		$scope.gameBoard[box]=event.target.innerHTML;
 
-		if (turn == 'X') {
-			fillArray('X')
-			event.target.innerHTML = 'X';
-			turn = 'O';
-		} else {
-			fillArray('O')
-			event.target.innerHTML = 'O';
-			turn = 'X';
-		}
-	} else {
-		alert("Pick another box!" + ind);
+		playerTurn++;
+alert(box);	
 	}
-	// insert function to check win conditions
-	winCondition();
-	tieCondition();
-}
 
+$scope.win = function(){
+	var wins=[[0, 1, 2, "row 1"],[3, 4, 5, "row 2"],[6, 7, 8, "row 3"],
+			 [0, 3, 6, "column 1"],[1, 4, 7, "column 2"],[2, 5, 8, "column 3"],
+			 [0, 4, 8, "diagonal 1"],[2, 4, 6, "diagonal 2"]]
 
-function fillArray(player) {
-	var box = event.target.id;
-	var ind = box.substring(3) - 1;
-	gameBoard[ind] = player;
-	gameBoard[ind] = fillArray.length;
-	// this is not populating the arrays with "X" or "O" to tell who is winning
-	console.log(gameBoard[ind] = player)
-}
-
-// gameBoard = [0,1,2,3,4,5,6,7,8]
-
-var wins=[[0, 1, 2, "row 1"],
-		  [3, 4, 5, "row 2"],
-		  [6, 7, 8, "row 3"],
-		  [0, 3, 6, "column 1"],
-		  [1, 4, 7, "column 2"],
-		  [2, 5, 8, "column 3"],
-		  [0, 4, 8, "diagonal 1"],
-		  [2, 4, 6, "diagonal 2"]
-		  ]
-
-function winCondition(){
-	for (var i = 0; i < wins.length; i++){
-		if ((gameBoard[wins[i][0]] != "") && (gameBoard[wins[i][0]] == gameBoard[wins[i][1]]) && (gameBoard[wins[i][1]] == gameBoard[wins[i][2]]))
-		{
-			alert(gameBoard[wins[i][0]] + " win! by " + wins[i][3]);
-			gameEnded = true;
-		} 
+	
+			for(var i = 0; i < wins.length; i++)
+				if (($scope.gameBoard[wins[i][0]] != '') && 
+					($scope.gameBoard[wins[i][0]] == $scope.gameBoard[wins[i][1]]) && 
+					($scope.gameBoard[wins[i][1]] == $scope.gameBoard[wins[i][2]]))
+					{
+				
+						alert($scope.gameBoard[wins[i][0]] + " win! by " + wins[i][3]);
+						gameEnded = true;
+					} 				
 	}
-}
+$scope.tie = function(){
+	gameEnded = true;
 
-function tieCondition(){
-	 gameEnded = true;
-
-	for(var i = 0; i < gameBoard.length; i++)
-		if (gameBoard[i]=="")
+	for(var i = 0; i < $scope.gameBoard.length; i++)
+		if ($scope.gameBoard[i]=="")
 		{
 			gameEnded = false;
 			break;
@@ -88,35 +65,8 @@ function tieCondition(){
 			alert("it's a tie!");
 			gameEnded = true;
 		}
-}	
-	
-
-
-
-
-
-
-
-
-function buttonClick(){
-	alert( "my button was clicked!");
-	
-	// this is what i want the button to do
-	// 	if there is nothing in the game board 
-	// 		btn innerHTML should be ("play game!");
-	// 	else
-	// 		gameBoard array should be cleared 
-	// 		gameBoard[ind] = (array.length == "")
-	// 		btn innerHTML should be ("restart game!")
-	
-}
-
-function pageLoaded(){
-	var box = document.getElementsByClassName("box");
-	// variable box is now identified as the classes named box
-	for(var i = 0; i < box.length; ++i)
-	// for (i=number) that is equal to 0, and number is less than the total numbers of box, add box by 1
-		box[i].onclick = clickDiv;
 
 }
 
+}
+	

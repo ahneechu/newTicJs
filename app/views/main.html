@@ -1,17 +1,22 @@
-<div id="container">
+<div id="wrapper" ng-init="showDetails = false; winMsg = false" >
+<!-- ng-controller="ticTacCtrl" -->
     <h1>Tic Tac Toe</h1>
 
-    <div class="container" ng-controller="ticTacCtrl">
+    <button id="startBtn" class="btn" value="Start Game!" ng-click="showDetails = !showDetails" ng-hide="showDetails">Start Game!</button>
+
+    <button id="winMsg" class="btn" ng-show="winMsg.length > 0" ng-click="playAgain();"> {{winMsg}} <br /> Play again?</button>
+
+    <div class="container" ng-show="showDetails">
           
-        <div ng-class="{box:true}" ng-repeat="box in gameBoard" ng-click="clickBox($index); win(); tie();">
+        <div ng-class="{box:true}" ng-repeat="box in games.gameBoard" ng-click="clickBox($index); win(); tie();">
            {{box}}
 
                
         </div>
 
+        <input type="button" id="resetBtn" value="Reset Game!" ng-click="resetClick()"/>
+
     </div>
             
-            <!-- <input type="button" id="btn" value="Play Now!" ng-click="buttonClick()"> -->
-
 </div>
        

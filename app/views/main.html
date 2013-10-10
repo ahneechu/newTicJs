@@ -1,10 +1,13 @@
-<div id="wrapper" ng-init="showDetails = false; winMsg = false" >
-<!-- ng-controller="ticTacCtrl" -->
+<div id="wrapper" ng-init="showDetails = false; showWinMsg = false; showTieMsg = false;" >
+
     <h1>Tic Tac Toe</h1>
 
     <button id="startBtn" class="btn" value="Start Game!" ng-click="showDetails = !showDetails" ng-hide="showDetails">Start Game!</button>
 
-    <button id="winMsg" class="btn" ng-show="winMsg.length > 0" ng-click="playAgain();"> {{winMsg}} <br /> Play again?</button>
+    <button id="winMsg" class="btn" ng-show="showWinMsg" ng-click="playAgain();"> Player {{(games.playerTurn % 2)+ 1}} wins! <br /> Play again?</button>
+
+    <button id="tieMsg" class="btn" ng-show="showTieMsg" ng-click="playAgain();"> It's a tie! <br /> Play again?</button>
+
 
     <div class="container" ng-show="showDetails">
           

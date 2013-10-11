@@ -11,7 +11,7 @@ angular.module('newTicApp')
   	var games = new Firebase("https://newtictactoe.firebaseio.com/games");
   	angularFire(games, $scope, "games").then(function(){  
 
-	  	// 
+
 // });
 
 
@@ -31,6 +31,7 @@ angular.module('newTicApp')
     		if ($scope.games[$scope.gameId].gameBoard[box] != "X" && $scope.games[$scope.gameId].gameBoard[box] != "O") 
 	    		{
 	    		$scope.games[$scope.gameId].gameBoard[box] = ($scope.games[$scope.gameId].playerTurn % 2 == 1 ? "X" : "O");
+	    		$scope.games[$scope.gameId].playerTurn++;
 	    		}
 			// if($scope.games.gamegameEnded == true) 
 			// return;
@@ -47,18 +48,18 @@ angular.module('newTicApp')
 
 				$scope.win();
 				$scope.tie();
-				$scope.games[$scope.gameId].playerTurn++;
 
+				console.log($scope.games[$scope.gameId].playerTurn);
 				console.log($scope.games[$scope.gameId].gameBoard[box]);
 				console.log($scope.games[$scope.gameId].gameBoard);
 
-	  // 	$scope.$watch("games.gameBoard", function(){
-   //  		console.log("Game Ended: " + $scope.games.gameEnded);
+	  // 	$scope.$watch("$scope.games[$scope.gameId].gameBoard", function(){
+   //  		console.log("Game Ended: " + $scope.games[$scope.gameId].gameEnded);
    //  			$scope.win();
 			// 	$scope.tie();
-			// 	$scope.games.playerTurn++;
+			// 	$scope.games[$scope.gameId].playerTurn++;
     			
-			// console.log("Game Ended: " + $scope.games.gameEnded);
+			// console.log("Game Ended: " + $scope.games[$scope.gameId].gameEnded);
     	
    //  	}, true);	// Let's try "deep linking"
 
@@ -139,7 +140,7 @@ angular.module('newTicApp')
 	  		if($scope.queue.gameId == undefined)
 	  		{
 	  			console.log("I'm player 1");
-	  			$scope.player = "p1";
+	  			$scope.player = "player 1";
 
 	  			var newGame = 
 		  			{
@@ -162,7 +163,7 @@ angular.module('newTicApp')
 	  		else
 	  		{
 	  			console.log("I'm player 2");
-	  			$scope.player = "p2";
+	  			$scope.player = "player 2";
 
 	  			$scope.gameId = $scope.queue.gameId;
 	  			$scope.queue = {};
@@ -181,24 +182,5 @@ angular.module('newTicApp')
 
 }]);
 
-	// $scope.showWinMsg = function(winMsg){
-		// 	console.log("line 47")
-		// 	// $scope.win ? true : false;
-
-		// 	if ($scope.win == true)
-		// 	{
-		// 		console.log("line 50")
-		// 		winMsg = $scope.games.gameBoard[wins[i][0]] + " win! by " + wins[i][3];
-		// 		// $scope.games.gameEnded;
-		// 		console.log("line 53")
-		// 	}
-		// 	console.log("line 55")
-		// 	if($scope.tie == true)
-		// 	{
-		// 		console.log("line 58")
-		// 		winMsg = "it's a tie!"
-		// 		// $scope.games.gameEnded;
-		// 		console.log("line 61")
-		// 	}
-		// };
+	
 	

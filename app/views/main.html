@@ -4,14 +4,14 @@
 
     <button id="startBtn" class="btn" value="Start Game!" ng-click="showDetails = !showDetails" ng-hide="showDetails">Start Game!</button>
 
-    <button id="winMsg" class="btn" ng-show="showWinMsg" ng-click="playAgain();"> Player {{(games.playerTurn % 2)+ 1}} wins! <br /> Play again?</button>
+    <button id="winMsg" class="btn" ng-show="showWinMsg" ng-click="playAgain();"> Player {{(games[gameId].playerTurn % 2)+ 1}} wins! <br /> Play again?</button>
 
     <button id="tieMsg" class="btn" ng-show="showTieMsg" ng-click="playAgain();"> It's a tie! <br /> Play again?</button>
 
 
     <div class="container" ng-show="showDetails">
           
-        <div ng-class="{box:true}" ng-repeat="box in games.gameBoard" ng-click="clickBox($index); win(); tie();">
+        <div ng-class="{box:true}" ng-repeat="box in games[gameId].gameBoard" ng-click="clickBox($index); win(); tie();">
            {{box}}
 
                

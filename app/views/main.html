@@ -21,9 +21,9 @@
 
         <button id="startBtn" class="btn" value="Start Game!" ng-click="showDetails = !showDetails" ng-hide="showDetails">Start Game!</button>
 
-        <button id="winMsg" class="btn" ng-show="games[$scope.gameId].showWinMsg" ng-click="playAgain();"> Player {{(games[gameId].playerTurn % 2)+ 1}} wins! <br /> Play again?</button>
+        <button id="winMsg" class="btn" ng-show="games[gameId].showWinMsg" ng-click="playAgain();"> Player {{(games[gameId].playerTurn % 2)+ 1}} wins! <br /> Play again?</button>
 
-        <button id="tieMsg" class="btn" ng-show="games[$scope.gameId].showTieMsg" ng-click="playAgain();"> It's a tie! <br /> Play again?</button>
+        <button id="tieMsg" class="btn" ng-show="games[gameId].showTieMsg" ng-click="playAgain();"> It's a tie! <br /> Play again?</button>
 
         <input type="button" id="resetBtn" value="Reset Game!" ng-show="showDetails" ng-click="resetClick()"/>
 

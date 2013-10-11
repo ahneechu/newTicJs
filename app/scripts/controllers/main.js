@@ -11,6 +11,59 @@ angular.module('newTicApp')
   	var games = new Firebase("https://newtictactoe.firebaseio.com/games");
   	angularFire(games, $scope, "games").then(function(){  
 
+  		var queue = new Firebase("https://newtictactoe.firebaseio.com/queue");
+	  	angularFire(queue, $scope, "queue").then(function(){
+	  		if($scope.queue.gameId == undefined)
+	  		{
+	  			console.log("I'm player 1");
+	  			$scope.player = "player 1";
+
+	  			var newGame = 
+		  			{
+		  				gameEnded: false,
+		    			gameBoard: ['','','','','','','','',''],
+		    			playerTurn: 1,
+		    			showWinMsg: false,
+		    			showTieMsg: false
+		    			// turnCount:
+		  			};
+	  			// $scope.games = [];
+	  			// console.log($scope.games);
+	  			$scope.gameId = $scope.games.push(newGame) -1;
+	  			$scope.queue.gameId = $scope.gameId;
+	  			console.log("player 1's game is: " + $scope.gameId);
+
+	  			$scope.games.push(newGame);
+
+	  			$scope.queue.gameId = $scope.gameId;
+	  		}
+	  		else
+	  		{
+	  			console.log("I'm player 2");
+	  			$scope.player = "player 2";
+
+	  			$scope.gameId = $scope.queue.gameId;
+	  			$scope.queue = {};
+	  			console.log("player 2's game is: " + $scope.gameId);
+	  		}
+
+	  	var waiting = true
+	  	$scope.waitMsg = function(){
+	  		if (!waiting && $scope.playerTurn == 1) 
+	  		{
+	  			// player1 == "X";
+	  			$scope.waitMsg = true;
+	  		} 
+	  		// else
+	  		// {
+	  		// 	player2 == "O";
+	  		// }
+
+	  	};	
+
+
+	  	});
+
 
 // });
 
@@ -19,11 +72,11 @@ angular.module('newTicApp')
  //  	var promise = angularFire(games, $scope, "games", {});
 
    //  promise.then(function(){
-    	$scope.games = {
-			gameEnded: false,
-    		gameBoard: ['','','','','','','','',''],
-    		playerTurn: 1
-    	};
+   //  	$scope.games = {
+			// gameEnded: false,
+   //  		gameBoard: ['','','','','','','','',''],
+   //  		playerTurn: 1
+   //  	};
 
 
 
@@ -32,6 +85,7 @@ angular.module('newTicApp')
 	    		{
 	    		$scope.games[$scope.gameId].gameBoard[box] = ($scope.games[$scope.gameId].playerTurn % 2 == 1 ? "X" : "O");
 	    		$scope.games[$scope.gameId].playerTurn++;
+
 	    		}
 			// if($scope.games.gamegameEnded == true) 
 			// return;
@@ -65,7 +119,7 @@ angular.module('newTicApp')
 
 		};
 
-		
+
 	var wins=[[0, 1, 2, "row 1"],[3, 4, 5, "row 2"],[6, 7, 8, "row 3"],
 			 [0, 3, 6, "column 1"],[1, 4, 7, "column 2"],[2, 5, 8, "column 3"],
 			 [0, 4, 8, "diagonal 1"],[2, 4, 6, "diagonal 2"]];
@@ -79,12 +133,10 @@ angular.module('newTicApp')
 					{
 						// $scope.showWinMsg = $scope.games.gameBoard[wins[i][0]] + " win! by " + wins[i][3];
 						$scope.games[$scope.gameId].gameEnded = true;
-						$scope.showWinMsg = true;
+						$scope.games[$scope.gameId].showWinMsg = true;
 						// alert($scope.gameBoard[wins[i][0]] + " win! by " + wins[i][3]);
 						console.log($scope.games[$scope.gameId].gameEnded);
-						// This is just as a test...
-						$scope.showWinMsg = true;
-						console.log($scope.showWinMsg);
+						console.log($scope.games[$scope.gameId].showWinMsg);
 					}
 		};
 
@@ -103,9 +155,9 @@ angular.module('newTicApp')
 
 				if($scope.games[$scope.gameId].gameEnded)
 				{
-					$scope.showTieMsg = true;
+					$scope.games[$scope.gameId].showTieMsg = true;
 					console.log($scope.games[$scope.gameId].gameEnded);
-					console.log($scope.showTieMsg);
+					console.log($scope.games[$scope.gameId].showTieMsg);
 					// alert("it's a tie!");
 				}
 		};
@@ -122,60 +174,18 @@ angular.module('newTicApp')
 			// alert( "my button was clicked!");
 		};
 
+
 		$scope.playAgain = function(){
 			for(var i = 0; i < $scope.games[$scope.gameId].gameBoard.length; i++){
 				$scope.games[$scope.gameId].gameBoard[i] = '';	
 			}
-			$scope.showWinMsg = false;
-			$scope.showTieMsg = false;
+			$scope.games[$scope.gameId].showWinMsg = false;
+			$scope.games[$scope.gameId].showTieMsg = false;
 			$scope.games[$scope.gameId].playerTurn = 1;
 			$scope.games[$scope.gameId].gameEnded = false;
 			console.log($scope.games[$scope.gameId].gameBoard);
 			// alert( "my button was clicked!");
 		};
-
-
-	var queue = new Firebase("https://newtictactoe.firebaseio.com/queue");
-	  	angularFire(queue, $scope, "queue").then(function(){
-	  		if($scope.queue.gameId == undefined)
-	  		{
-	  			console.log("I'm player 1");
-	  			$scope.player = "player 1";
-
-	  			var newGame = 
-		  			{
-		  				gameEnded: false,
-		    			gameBoard: ['','','','','','','','',''],
-		    			playerTurn: 1,
-		    			// win:
-		    			// turnCount:
-		  			};
-	  			$scope.games = [];
-	  			console.log($scope.games);
-	  			$scope.gameId = $scope.games.push(newGame) -1;
-	  			$scope.queue.gameId = $scope.gameId;
-	  			console.log("player 1's game is: " + $scope.gameId);
-
-	  			$scope.games.push(newGame);
-
-	  			$scope.queue.gameId = $scope.gameId;
-	  		}
-	  		else
-	  		{
-	  			console.log("I'm player 2");
-	  			$scope.player = "player 2";
-
-	  			$scope.gameId = $scope.queue.gameId;
-	  			$scope.queue = {};
-	  			console.log("player 2's game is: " + $scope.gameId);
-	  		}
-
-	  	});
-
-
-
-
-
 
 
 	});

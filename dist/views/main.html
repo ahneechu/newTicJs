@@ -1,0 +1,31 @@
+<div class="container" ng-init="showDetails = false; showWinMsg = false; showTieMsg = false; waitMsg = false">
+
+    <h1>Tic Tac Toe</h1>
+
+    <!-- <button id="startBtn" class="btn" value="Start Game!" ng-click="showDetails = !showDetails" ng-hide="showDetails">Start Game!</button>
+
+    <button id="winMsg" class="btn" ng-show="showWinMsg" ng-click="playAgain();"> Player {{(games[gameId].playerTurn % 2)+ 1}} wins! <br /> Play again?</button>
+
+    <button id="tieMsg" class="btn" ng-show="showTieMsg" ng-click="playAgain();"> It's a tie! <br /> Play again?</button> -->
+
+
+    <!-- <div class="container" ng-show="showDetails"> -->
+          
+        <div ng-class="{box:true}" ng-show="showDetails" ng-repeat="box in games[gameId].gameBoard" ng-click="clickBox($index); $scope.win(); $scope.tie();">
+           {{box}}
+
+               
+        </div>
+
+        <!-- <button id="waitBtn" class="btn" ng-hide="waitMsg">Waiting for Player 2</button> -->
+
+        <button id="startBtn" class="btn" value="Start Game!" ng-click="showDetails = !showDetails" ng-hide="showDetails">Start Game!</button>
+
+        <button id="winMsg" class="btn" ng-show="games[$scope.gameId].showWinMsg" ng-click="playAgain();"> Player {{(games[gameId].playerTurn % 2)+ 1}} wins! <br> Play again?</button>
+
+        <button id="tieMsg" class="btn" ng-show="games[$scope.gameId].showTieMsg" ng-click="playAgain();"> It's a tie! <br> Play again?</button>
+
+        <input type="button" id="resetBtn" value="Reset Game!" ng-show="showDetails" ng-click="resetClick()">
+
+    </div>
+            

@@ -3,14 +3,27 @@ body{
     background-color: #eee;
 }
 
-
-h1{
+.header{
     text-align: center;
-    font-size: 50px;
-    font-weight: bold;
     text-shadow: 1px 1px #F36C8C;
     /*color: #ffffff;*/
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    margin: 10px auto;
+}
+
+h1{
+    font-size: 50px;
+    font-weight: bold;
+}
+
+h2{
+    font-size: 30px;
+    color: gray;
+    
+}
+
+h3{
+    font-size: 20px;
     
 }
 
@@ -121,7 +134,7 @@ font-weight: bold;
 
 #waitBtn{
     display: block;
-    
+
 }
 
 

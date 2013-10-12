@@ -22,13 +22,12 @@ angular.module('newTicApp')
 		  			{
 		  				gameEnded: false,
 		    			gameBoard: ['','','','','','','','',''],
-		    			playerTurn: 1,
+		    			playerTurn: 'player 1',
 		    			showWinMsg: false,
-		    			showTieMsg: false
-		    			// turnCount:
+		    			showTieMsg: false,
+		    			waitMsg: true
 		  			};
-	  			// $scope.games = [];
-	  			// console.log($scope.games);
+	  			
 	  			$scope.gameId = $scope.games.push(newGame) -1;
 	  			$scope.queue.gameId = $scope.gameId;
 	  			console.log("player 1's game is: " + $scope.gameId);
@@ -41,26 +40,15 @@ angular.module('newTicApp')
 	  		{
 	  			console.log("I'm player 2");
 	  			$scope.player = "player 2";
+	  			
 
 	  			$scope.gameId = $scope.queue.gameId;
 	  			$scope.queue = {};
 	  			console.log("player 2's game is: " + $scope.gameId);
+	  			$scope.games[$scope.gameId].waitMsg = false;
 	  		}
 
-	  	var waiting = true
-	  	$scope.waitMsg = function(){
-	  		if (!waiting && $scope.playerTurn == 1) 
-	  		{
-	  			// player1 == "X";
-	  			$scope.waitMsg = true;
-	  		} 
-	  		// else
-	  		// {
-	  		// 	player2 == "O";
-	  		// }
-
-	  	};	
-
+		
 
 	  	});
 
@@ -81,12 +69,32 @@ angular.module('newTicApp')
 
 
     	$scope.clickBox = function(box){
-    		if ($scope.games[$scope.gameId].gameBoard[box] != "X" && $scope.games[$scope.gameId].gameBoard[box] != "O") 
-	    		{
-	    		$scope.games[$scope.gameId].gameBoard[box] = ($scope.games[$scope.gameId].playerTurn % 2 == 1 ? "X" : "O");
-	    		$scope.games[$scope.gameId].playerTurn++;
+    		if ((!$scope.games[$scope.gameId].waitMsg) && ($scope.player == $scope.games[$scope.gameId].playerTurn)) {
+    			if ($scope.player == 'player 1') {
+		          $scope.games[$scope.gameId].gameBoard[box] = 'X';
+		        } else {
+		          $scope.games[$scope.gameId].gameBoard[box] = 'O';
+		        }
+		        if ($scope.games[$scope.gameId].playerTurn == 'player 1') {
+		          $scope.games[$scope.gameId].playerTurn = 'player 2';
+		        } else {
+		          $scope.games[$scope.gameId].playerTurn = 'player 1';
+		        }
+		      }
+		      	$scope.win();
+				$scope.tie();
 
-	    		}
+				console.log($scope.games[$scope.gameId].playerTurn);
+				console.log($scope.games[$scope.gameId].gameBoard[box]);
+				console.log($scope.games[$scope.gameId].gameBoard);
+		    };
+
+    		// if ($scope.games[$scope.gameId].gameBoard[box] != "X" && $scope.games[$scope.gameId].gameBoard[box] != "O") 
+	    	// 	{
+	    	// 	$scope.games[$scope.gameId].gameBoard[box] = ($scope.games[$scope.gameId].playerTurn % 2 == 1 ? "X" : "O");
+	    	// 	$scope.games[$scope.gameId].playerTurn++;
+
+	    	// 	}
 			// if($scope.games.gamegameEnded == true) 
 			// return;
 
@@ -100,12 +108,12 @@ angular.module('newTicApp')
 			// 		$scope.games.gameBoard[box] ="O";
 
 
-				$scope.win();
-				$scope.tie();
+			// 	$scope.win();
+			// 	$scope.tie();
 
-				console.log($scope.games[$scope.gameId].playerTurn);
-				console.log($scope.games[$scope.gameId].gameBoard[box]);
-				console.log($scope.games[$scope.gameId].gameBoard);
+			// 	console.log($scope.games[$scope.gameId].playerTurn);
+			// 	console.log($scope.games[$scope.gameId].gameBoard[box]);
+			// 	console.log($scope.games[$scope.gameId].gameBoard);
 
 	  // 	$scope.$watch("$scope.games[$scope.gameId].gameBoard", function(){
    //  		console.log("Game Ended: " + $scope.games[$scope.gameId].gameEnded);
@@ -117,7 +125,7 @@ angular.module('newTicApp')
     	
    //  	}, true);	// Let's try "deep linking"
 
-		};
+		// }; not sure what this is for...
 
 
 	var wins=[[0, 1, 2, "row 1"],[3, 4, 5, "row 2"],[6, 7, 8, "row 3"],

@@ -1,6 +1,10 @@
 body{
-    font-family: 'Happy Monkey', cursive;
-    background-color: #eee;
+    /*font-family: 'Happy Monkey', cursive;*/
+    font-family: 'Wire One', sans-serif;
+    /*background-color: #eee;*/
+    background:url('../images/blue_sky.jpg');
+    background-size: 1000px;
+    background-repeat: no-repeat;
 }
 
 .header{
@@ -13,12 +17,13 @@ body{
 
 h1{
     font-size: 50px;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 h2{
     font-size: 30px;
     color: gray;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
     
 }
 
@@ -26,6 +31,7 @@ h3{
     font-size: 20px;
     
 }
+
 
 /*#wrapper{
     max-width: 360px;
@@ -53,16 +59,19 @@ h3{
     font-size: 100px;
     text-align: center;
     line-height: 1em;
-    background-color: black;
+    /*background-color: #966B06;*/
+    /*background-color: #6DB3B3;*/
+    background-color: #4CB5ED;
 font-weight: bold;
     text-shadow: 1px 1px #F36C8C;
     color: #ffffff;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    opacity: .8;
 
 }
 
 .box:hover{
-    background-color: gray;
+    background-color: #CED6D6;
 }
 
 .top_row{
@@ -96,9 +105,10 @@ font-weight: bold;
     height: 50px;
     width: 300px;
     margin: 40px auto;
-    font-family: 'Happy Monkey', cursive;
-    padding: 10px 20px 11px !important;
-    font-size: 21px !important;
+    /*font-family: 'Happy Monkey', cursive;*/
+    font-family: 'Wire One', sans-serif;
+    padding: 10px 20px 11px;
+    font-size: 30px;
     background-color: #F36C8C;
     font-weight: bold;
     text-shadow: 1px 1px #F36C8C;
@@ -117,9 +127,10 @@ font-weight: bold;
     margin-left: 40px;
     position: absolute;
     z-index: 1;
-    font-family: 'Happy Monkey', cursive;
+    /*font-family: 'Happy Monkey', cursive;*/
+    font-family: 'Wire One', sans-serif;
     padding: 10px 20px 11px;
-    font-size: 21px;
+    font-size: 30px;
     background-color: #c3c3c3;
     font-weight: bold;
     text-shadow: 1px 1px #F36C8C;

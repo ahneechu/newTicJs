@@ -25,7 +25,8 @@ angular.module('newTicApp')
 		    			playerTurn: 'player 1',
 		    			showWinMsg: false,
 		    			showTieMsg: false,
-		    			waitMsg: true
+		    			waitMsg: true,
+		    			turnCount: 0
 		  			};
 	  			
 	  			$scope.gameId = $scope.games.push(newGame) -1;
@@ -48,6 +49,16 @@ angular.module('newTicApp')
 	  			$scope.games[$scope.gameId].waitMsg = false;
 	  		}
 
+		// how do i remove all games from the queue???
+		// var onComplete = function(removeQueue)
+		// {
+		// 	if ($scope.game[$scope.gameId].gameEnded = true)
+		// 	{
+		// 		$scope.queue.gameId.remove(onComplete);
+
+		// 	}
+		// };
+		// $scope.games.remove();
 		
 
 	  	});
@@ -69,64 +80,95 @@ angular.module('newTicApp')
 
 
     	$scope.clickBox = function(box){
-    		if ((!$scope.games[$scope.gameId].waitMsg) && ($scope.player == $scope.games[$scope.gameId].playerTurn)) {
-    			if ($scope.player == 'player 1') {
-		          $scope.games[$scope.gameId].gameBoard[box] = 'X';
-		        } else {
-		          $scope.games[$scope.gameId].gameBoard[box] = 'O';
+    		
+    		if ((!$scope.games[$scope.gameId].waitMsg) && ($scope.player == $scope.games[$scope.gameId].playerTurn)) 
+    			{
+           		if ($scope.player == 'player 1') 
+           			{
+		              $scope.games[$scope.gameId].gameBoard[box] = 'X';
+		            } 
+		            else 
+		            {
+		              $scope.games[$scope.gameId].gameBoard[box] = 'O';
+		            }
+		            if ($scope.games[$scope.gameId].playerTurn == 'player 1') 
+		            {
+		              $scope.games[$scope.gameId].playerTurn = 'player 2';
+		            } 
+		            else 
+		            {
+		              $scope.games[$scope.gameId].playerTurn = 'player 1';
+		            }
 		        }
-		        if ($scope.games[$scope.gameId].playerTurn == 'player 1') {
-		          $scope.games[$scope.gameId].playerTurn = 'player 2';
-		        } else {
-		          $scope.games[$scope.gameId].playerTurn = 'player 1';
-		        }
-		      }
+			    	
+      
 		      	$scope.win();
 				$scope.tie();
 
 				console.log($scope.games[$scope.gameId].playerTurn);
 				console.log($scope.games[$scope.gameId].gameBoard[box]);
 				console.log($scope.games[$scope.gameId].gameBoard);
+				console.log(turnCount);
 		    };
 
-    		// if ($scope.games[$scope.gameId].gameBoard[box] != "X" && $scope.games[$scope.gameId].gameBoard[box] != "O") 
-	    	// 	{
-	    	// 	$scope.games[$scope.gameId].gameBoard[box] = ($scope.games[$scope.gameId].playerTurn % 2 == 1 ? "X" : "O");
-	    	// 	$scope.games[$scope.gameId].playerTurn++;
+		    // NEW PLAYER TURN CODE THAT WORKS
+		    //if ((!$scope.games[$scope.gameId].waitMsg) && ($scope.player == $scope.games[$scope.gameId].playerTurn)) 
+    			// {
+       //     		if ($scope.player == 'player 1') 
+       //     			{
+		     //          $scope.games[$scope.gameId].gameBoard[box] = 'X';
+		     //        } 
+		     //        else 
+		     //        {
+		     //          $scope.games[$scope.gameId].gameBoard[box] = 'O';
+		     //        }
+		     //        if ($scope.games[$scope.gameId].playerTurn == 'player 1') 
+		     //        {
+		     //          $scope.games[$scope.gameId].playerTurn = 'player 2';
+		     //        } 
+		     //        else 
+		     //        {
+		     //          $scope.games[$scope.gameId].playerTurn = 'player 1';
+		     //        }
+		     //    }
+	     //        	$scope.win();
+	     //    	    $scope.tie();
 
-	    	// 	}
-			// if($scope.games.gamegameEnded == true) 
-			// return;
-
-			// if($scope.games.gameBoard[box] !='')
-			// 	// alert ("pick another box!");
-			// return;
-
-			// 	if($scope.games.playerTurn % 2 == 1)
-			// 		$scope.games.gameBoard[box] = "X";	
-			// 	else
-			// 		$scope.games.gameBoard[box] ="O";
+		    //     console.log($scope.games[$scope.gameId].playerTurn);
+		    //     console.log($scope.games[$scope.gameId].gameBoard[box]);
+		    //     console.log($scope.games[$scope.gameId].gameBoard);
+	     //    };
 
 
-			// 	$scope.win();
-			// 	$scope.tie();
+	     	// OLD CODE THAT DOESNT WORK ANYMORE...
+  //   		if ($scope.games[$scope.gameId].gameBoard[box] != "X" && $scope.games[$scope.gameId].gameBoard[box] != "O") 
+	 //    		{
+	 //    		$scope.games[$scope.gameId].gameBoard[box] = ($scope.games[$scope.gameId].playerTurn % 2 == 1 ? "X" : "O");
+	 //    		$scope.games[$scope.gameId].playerTurn++;
 
-			// 	console.log($scope.games[$scope.gameId].playerTurn);
-			// 	console.log($scope.games[$scope.gameId].gameBoard[box]);
-			// 	console.log($scope.games[$scope.gameId].gameBoard);
+	 //    		}
 
-	  // 	$scope.$watch("$scope.games[$scope.gameId].gameBoard", function(){
-   //  		console.log("Game Ended: " + $scope.games[$scope.gameId].gameEnded);
-   //  			$scope.win();
-			// 	$scope.tie();
-			// 	$scope.games[$scope.gameId].playerTurn++;
-    			
-			// console.log("Game Ended: " + $scope.games[$scope.gameId].gameEnded);
-    	
-   //  	}, true);	// Let's try "deep linking"
+	 // //    	// EVEN OLDER CODE
+		// // 	// if($scope.games.gamegameEnded == true) 
+		// // 	// return;
 
-		// }; not sure what this is for...
+		// // 	// if($scope.games.gameBoard[box] !='')
+		// // 	// 	// alert ("pick another box!");
+		// // 	// return;
 
+		// // 	// 	if($scope.games.playerTurn % 2 == 1)
+		// // 	// 		$scope.games.gameBoard[box] = "X";	
+		// // 	// 	else
+		// // 	// 		$scope.games.gameBoard[box] ="O";
+
+
+		// 		$scope.win();
+		// 		$scope.tie();
+
+		// 		console.log($scope.games[$scope.gameId].playerTurn);
+		// 		console.log($scope.games[$scope.gameId].gameBoard[box]);
+		// 		console.log($scope.games[$scope.gameId].gameBoard);
+		// };
 
 	var wins=[[0, 1, 2, "row 1"],[3, 4, 5, "row 2"],[6, 7, 8, "row 3"],
 			 [0, 3, 6, "column 1"],[1, 4, 7, "column 2"],[2, 5, 8, "column 3"],
@@ -175,9 +217,12 @@ angular.module('newTicApp')
 		$scope.resetClick = function(){
 			for(var i = 0; i < $scope.games[$scope.gameId].gameBoard.length; i++){
 				$scope.games[$scope.gameId].gameBoard[i] = '';	
+
 			}
 			$scope.games[$scope.gameId].playerTurn = 1;
 			$scope.games[$scope.gameId].gameEnded = false;
+			$scope.games[$scope.gameId].showWinMsg = false;
+			$scope.games[$scope.gameId].showTieMsg = false;
 			console.log($scope.games[$scope.gameId].gameBoard);
 			// alert( "my button was clicked!");
 		};
@@ -187,10 +232,10 @@ angular.module('newTicApp')
 			for(var i = 0; i < $scope.games[$scope.gameId].gameBoard.length; i++){
 				$scope.games[$scope.gameId].gameBoard[i] = '';	
 			}
-			$scope.games[$scope.gameId].showWinMsg = false;
-			$scope.games[$scope.gameId].showTieMsg = false;
 			$scope.games[$scope.gameId].playerTurn = 1;
 			$scope.games[$scope.gameId].gameEnded = false;
+			$scope.games[$scope.gameId].showWinMsg = false;
+			$scope.games[$scope.gameId].showTieMsg = false;
 			console.log($scope.games[$scope.gameId].gameBoard);
 			// alert( "my button was clicked!");
 		};

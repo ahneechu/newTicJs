@@ -1,5 +1,9 @@
 <div class="container" ng-init="showDetails = false; showWinMsg = false; showTieMsg = false; waitMsg = true">
 
+    <button id="startBtn" class="btn" value="Start Game!" ng-click="showDetails = !showDetails" ng-hide="showDetails">Start Game!</button>
+
+    <button id="waitBtn" class="btn" ng-show="games[gameId].waitMsg">Waiting for Player 2</button>
+
     <h1 class="header">Tic Tac Toe</h1>
     
 
@@ -14,15 +18,11 @@
 
     <!-- <div class="container" ng-show="showDetails"> -->
           
-        <div ng-class="{box:true}" ng-show="showDetails" ng-repeat="box in games[gameId].gameBoard" ng-click="clickBox($index); $scope.win(); $scope.tie();">
+        <div ng-class="{box:true, value: $index, top_row: [0,1,2], bottom_row: [6,7,8], col1: [0,3,6], col3: [2, 5, 8] }" ng-show="showDetails" ng-repeat="box in games[gameId].gameBoard" ng-click="clickBox($index); $scope.win(); $scope.tie();">
            {{box}}
 
                
         </div>
-
-        <button id="waitBtn" class="btn" ng-show="games[gameId].waitMsg">Waiting for Player 2</button>
-
-        <button id="startBtn" class="btn" value="Start Game!" ng-click="showDetails = !showDetails" ng-hide="showDetails">Start Game!</button>
 
         <button id="winMsg" class="btn" ng-show="games[gameId].showWinMsg" ng-click="playAgain();"> {{games[gameId].playerTurn}} wins! <br> Play again?</button>
         <!-- {{(games[gameId].playerTurn % 2)+ 1}} -->

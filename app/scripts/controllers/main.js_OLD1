@@ -26,7 +26,7 @@ angular.module('newTicApp')
 		    			showWinMsg: false,
 		    			showTieMsg: false,
 		    			waitMsg: true,
-		    			turnCount: 0
+		    			// turnCount: 0
 		  			};
 	  			
 	  			$scope.gameId = $scope.games.push(newGame) -1;
@@ -48,53 +48,67 @@ angular.module('newTicApp')
 	  			console.log("player 2's game is: " + $scope.gameId);
 	  			$scope.games[$scope.gameId].waitMsg = false;
 	  		}
-
+		
 	  	});
+
+
+// });
+
+
+	// var games = new Firebase("https://newtictactoe.firebaseio.com/games");
+ //  	var promise = angularFire(games, $scope, "games", {});
+
+   //  promise.then(function(){
+   //  	$scope.games = {
+			// gameEnded: false,
+   //  		gameBoard: ['','','','','','','','',''],
+   //  		playerTurn: 1
+   //  	};
+
 
 
     	$scope.clickBox = function(box){
 
-			if ($scope.player == $scope.games[$scope.gameId].playerTurn)
-    			{
-           		if ($scope.player == 'player 1') 
+    		if ($scope.player == $scope.games[$scope.gameId].playerTurn)
+				{
+					if (($scope.games[$scope.gameId].gameBoard[box] != "X") && ($scope.games[$scope.gameId].gameBoard[box] != "O")) 
+		    		{
+		    		$scope.games[$scope.gameId].gameBoard[box] = ($scope.games[$scope.gameId].playerTurn % 2 == 1 ? "X" : "O");
+		    		}
+				
+
+					// if($scope.games[$scope.gameId].gameBoard[box] !='')
+					// 	// alert ("pick another box!");
+					// return;
+
+					if($scope.games[$scope.gameId].playerTurn % 2 == 1)
+					{
+						$scope.games[$scope.gameId].gameBoard[box] = "X";	
+					}
+					else
+					{
+						$scope.games[$scope.gameId].gameBoard[box] ="O";
+					}
+
+
+           			if ($scope.player == 'player 1') 
            			{
-		              $scope.games[$scope.gameId].gameBoard[box] = 'X';
+		              $scope.games[$scope.gameId].playerTurn = 'player 1';
 		            } 
 		            else 
-		            {
-		              $scope.games[$scope.gameId].gameBoard[box] = 'O';
-		            }
-		            if ($scope.games[$scope.gameId].playerTurn == 'player 1') 
 		            {
 		              $scope.games[$scope.gameId].playerTurn = 'player 2';
-		            } 
-		            else 
-		            {
-		              $scope.games[$scope.gameId].playerTurn = 'player 1';
-		            }
-		        }
+		         	}
 
-						    //  this doesnt work, but could it??
-						    // switch (expr) {
-								  // case $scope.player == "player 1":
-								  //   $scope.games[$scope.gameId].gameBoard[box] = "X";
-						    //         $scope.games[$scope.gameId].playerTurn = 'player 2';
-						    //         ++$scope.player
-								  //   break;
-								  // case $scope.player == "player 2":
-								  //   $scope.games[$scope.gameId].gameBoard[box] ="O";
-						    //           $scope.games[$scope.gameId].playerTurn = 'player 1';
-						    //           --$scope.player
-								  //   break;
-								  // case "player 1":
-								  // case "player 2":
-
+		         }
+      
 		      	$scope.win();
 				$scope.tie();
 
 				console.log($scope.games[$scope.gameId].playerTurn);
 				console.log($scope.games[$scope.gameId].gameBoard[box]);
 				console.log($scope.games[$scope.gameId].gameBoard);
+				// console.log(turnCount);
 		    };
 
 		    // NEW PLAYER TURN CODE THAT WORKS
